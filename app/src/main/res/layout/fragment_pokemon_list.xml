@@ -35,12 +35,7 @@
         app:layout_constraintStart_toEndOf="@+id/imageView"
         app:layout_constraintTop_toTopOf="@+id/imageView"/>
 
-    <com.google.android.material.divider.MaterialDivider
-        android:layout_width="match_parent"
-        android:layout_height="2dp"
-        android:id="@+id/divider"
-        app:layout_constraintBottom_toTopOf="@+id/recyclerView"
-        app:layout_constraintTop_toBottomOf="@+id/editTextTextFilter" />
+    >
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/recyclerView"
@@ -50,7 +45,7 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/divider" />
+        app:layout_constraintTop_toBottomOf="@+id/imageView" />
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>
