@@ -6,6 +6,7 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.core.view.isVisible
 import androidx.core.widget.addTextChangedListener
 import androidx.core.widget.doOnTextChanged
 import androidx.fragment.app.viewModels
@@ -36,12 +37,13 @@ class PokemonListFragment : Fragment() {
         viewModel.dataState.observe(viewLifecycleOwner) { dataState ->
             when (dataState) {
                 is DataState.Loading -> {
-                    // Actualiza la vista para indicar que se está cargando
+
                 }
                 is DataState.Error -> {
                     // Actualiza la vista para indicar que se produjo un error
                 }
                 is DataState.Success -> {
+                    binding.progressBar.isVisible = false
                     // Actualiza la vista con la lista de Pokemon
                     adapter.updateList(dataState.pokemonList)
                     binding.editTextTextFilter.addTextChangedListener { userFilter ->
