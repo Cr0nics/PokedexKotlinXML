@@ -5,6 +5,7 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
+import com.example.capitalizeFirstChar
 import com.example.pokeapi.data.model.ConsumedModel.PokeListItem
 import com.example.pokeapi.domain.GetPokemonListUseCase
 import kotlinx.coroutines.launch
@@ -28,7 +29,7 @@ class PokemonListViewModel : ViewModel() {
             try {
                 val response = GetPokemonListUseCase().invoke()
                 _dataState.postValue(DataState.Success(response))
-                Log.e("Joaking", "${_dataState.toString()}")
+                Log.e("Joaking", "$_dataState")
 
             } catch (e: IOException) {
                 _dataState.postValue(DataState.Error)
@@ -36,7 +37,14 @@ class PokemonListViewModel : ViewModel() {
             }
         }
     }
+    fun filteredPokemons(pokemonNameFilter:String, pokemonList: List<PokeListItem>): List<PokeListItem>{
 
+        val filteredPokemon = pokemonList.filter { pokemon ->
+            pokemon.name.contains(pokemonNameFilter) || pokemon.name.contains(capitalizeFirstChar(pokemonNameFilter) )
+        }
+
+        return filteredPokemon
+    }
     //  fun getDitto() {
     //       viewModelScope.launch {
     //           try {
