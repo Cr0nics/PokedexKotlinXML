@@ -28,7 +28,7 @@ class PokemonListViewModel : ViewModel() {
             try {
                 val response = GetPokemonListUseCase().invoke()
                 _dataState.postValue(DataState.Success(response))
-                Log.e("Joaking", "${_dataState.toString()}")
+                Log.e("Joaking", "$_dataState")
 
             } catch (e: IOException) {
                 _dataState.postValue(DataState.Error)
