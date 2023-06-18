@@ -47,11 +47,7 @@ class PokemonListFragment : Fragment() {
                     // Actualiza la vista con la lista de Pokemon
                     adapter.updateList(dataState.pokemonList)
                     binding.editTextTextFilter.addTextChangedListener { userFilter ->
-                        val filteredPokemon = dataState.pokemonList.filter { pokemon ->
-                            pokemon.name.contains(userFilter.toString())
-
-                        }
-                        adapter.updateList(filteredPokemon)
+                        adapter.updateList(viewModel.filteredPokemons(userFilter.toString(),dataState.pokemonList))
                     }
                 }
             }

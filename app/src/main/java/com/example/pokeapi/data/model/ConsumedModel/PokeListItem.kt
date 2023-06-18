@@ -1,5 +1,6 @@
 package com.example.pokeapi.data.model.ConsumedModel
 
+import com.example.capitalizeFirstChar
 import com.example.pokeapi.data.model.ResultPokemon
 import java.util.*
 
@@ -16,10 +17,7 @@ private const val URL_RAW = "https://raw.githubusercontent.com/PokeAPI/sprites/m
 fun ResultPokemon.toDomain(): PokeListItem {
     val arrayUrl = url.split("/")
     val id = arrayUrl[arrayUrl.size - 2].toInt()
-    val name = name.replaceFirstChar {
-        // cada nombre con Mayuscula
-        if (it.isLowerCase()) it.titlecase(Locale.getDefault()) else it.toString()
-    }
+    val name = capitalizeFirstChar(name)
     val img = "$URL_RAW$id.png"
     return PokeListItem(id, name, img)
 }
