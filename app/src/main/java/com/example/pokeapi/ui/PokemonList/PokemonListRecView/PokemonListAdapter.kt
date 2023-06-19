@@ -10,7 +10,7 @@ import com.example.pokeapi.data.model.DetailModel.PokeModelDetails
 import com.example.pokeapi.data.model.PokemonListModel
 import com.example.pokeapi.data.model.ResultPokemon
 
-class PokemonListAdapter(private var pokemonList: List<PokeListItem>,private val onItemClick: (view:View) -> Unit) :
+class PokemonListAdapter(private var pokemonList: List<PokeListItem>,private val onItemClick: (view:View,pokemon:PokeListItem) -> Unit) :
     RecyclerView.Adapter<PokemonListViewHolder>() {
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): PokemonListViewHolder {
         val view =

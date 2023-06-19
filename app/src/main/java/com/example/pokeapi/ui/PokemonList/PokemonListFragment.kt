@@ -12,7 +12,9 @@ import androidx.fragment.app.viewModels
 import androidx.navigation.Navigation
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.pokeapi.R
+import com.example.pokeapi.data.model.ConsumedModel.PokeListItem
 import com.example.pokeapi.databinding.FragmentPokemonListBinding
+import com.example.pokeapi.ui.PokemonFragment.PokemonDetailFragment
 import com.example.pokeapi.ui.PokemonList.PokemonListRecView.PokemonListAdapter
 import com.example.pokeapi.ui.viewModel.DataState
 import com.example.pokeapi.ui.viewModel.PokemonListViewModel
@@ -21,8 +23,8 @@ class PokemonListFragment : Fragment() {
 
     private lateinit var binding: FragmentPokemonListBinding
     private val viewModel: PokemonListViewModel by viewModels()
-    private val adapter: PokemonListAdapter = PokemonListAdapter(emptyList()) {
-        Navigation.findNavController(it)
+    private val adapter: PokemonListAdapter = PokemonListAdapter(emptyList()) {view:View,pokemon: PokeListItem ->
+        Navigation.findNavController(view)
             .navigate(R.id.action_pokemonListFragment_to_pokemonDetailFragment)
     }
 
@@ -79,5 +81,8 @@ class PokemonListFragment : Fragment() {
             .navigate(R.id.action_pokemonListFragment_to_pokemonDetailFragment)
     }
 
+    companion object {
+        fun newInstance() = PokemonDetailFragment()
+    }
 
 }
