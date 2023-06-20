@@ -7,26 +7,26 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import com.example.pokeapi.R
-import com.example.pokeapi.ui.viewModel.PokemonDetailsViewModel
+import com.example.pokeapi.ui.viewModel.PokemonDetailViewModel
 
-class PokemonDetailsFragment : Fragment() {
+class PokemonDetailFragment : Fragment() {
 
     companion object {
-        fun newInstance() = PokemonDetailsFragment()
+        fun newInstance() = PokemonDetailFragment()
     }
 
-    private lateinit var viewModel: PokemonDetailsViewModel
+    private lateinit var viewModel: PokemonDetailViewModel
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        return inflater.inflate(R.layout.fragment_pokemon_details, container, false)
+        return inflater.inflate(R.layout.fragment_pokemon_detail, container, false)
     }
 
     override fun onActivityCreated(savedInstanceState: Bundle?) {
         super.onActivityCreated(savedInstanceState)
-        viewModel = ViewModelProvider(this).get(PokemonDetailsViewModel::class.java)
+        viewModel = ViewModelProvider(this).get(PokemonDetailViewModel::class.java)
         // TODO: Use the ViewModel
     }
 

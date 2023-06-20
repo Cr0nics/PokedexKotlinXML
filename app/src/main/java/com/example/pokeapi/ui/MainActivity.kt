@@ -4,6 +4,7 @@ import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import com.example.pokeapi.R
 import com.example.pokeapi.databinding.ActivityMainBinding
+import com.example.pokeapi.databinding.FragmentPokemonListBinding
 import com.example.pokeapi.ui.PokemonList.PokemonListFragment
 
 
@@ -17,11 +18,12 @@ class MainActivity : AppCompatActivity() {
         val view = binding.root
         setContentView(view)
 
-        supportFragmentManager.beginTransaction()
-            .replace(R.id.container, PokemonListFragment())
-            .commit()
+
     }
+
+
 }
+
 
 
 
