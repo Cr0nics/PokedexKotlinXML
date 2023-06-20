@@ -9,7 +9,10 @@ import android.view.ViewGroup
 import androidx.core.view.isVisible
 import androidx.core.widget.addTextChangedListener
 import androidx.fragment.app.viewModels
+import androidx.navigation.NavDirections
 import androidx.navigation.Navigation
+import androidx.navigation.findNavController
+import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.pokeapi.R
 import com.example.pokeapi.data.model.ConsumedModel.PokeListItem
@@ -18,14 +21,14 @@ import com.example.pokeapi.ui.PokemonFragment.PokemonDetailFragment
 import com.example.pokeapi.ui.PokemonList.PokemonListRecView.PokemonListAdapter
 import com.example.pokeapi.ui.viewModel.DataState
 import com.example.pokeapi.ui.viewModel.PokemonListViewModel
+import com.example.pokeapi.ui.viewModel.PokemonState
 
 class PokemonListFragment : Fragment() {
 
     private lateinit var binding: FragmentPokemonListBinding
     private val viewModel: PokemonListViewModel by viewModels()
     private val adapter: PokemonListAdapter = PokemonListAdapter(emptyList()) {view:View,pokemon: PokeListItem ->
-        Navigation.findNavController(view)
-            .navigate(R.id.action_pokemonListFragment_to_pokemonDetailFragment)
+        navigate(view,pokemon)
     }
 
 
@@ -64,6 +67,7 @@ class PokemonListFragment : Fragment() {
                         )
                     }
                 }
+
             }
         }
 
@@ -75,10 +79,16 @@ class PokemonListFragment : Fragment() {
         binding.recyclerView.layoutManager = LinearLayoutManager(requireContext())
         binding.recyclerView.adapter = adapter
     }
+    //pokemon:PokeListItem
 
-    private fun navigate(view: View) {
-        Navigation.findNavController(view)
-            .navigate(R.id.action_pokemonListFragment_to_pokemonDetailFragment)
+
+    private fun navigate(view: View,pokemon:PokeListItem) {
+
+        val bundle = Bundle()
+        bundle.putString("texto", pokemon.name)
+        val pokemonDetailFragment = PokemonDetailFragment()
+        pokemonDetailFragment.arguments = bundle
+        findNavController().navigate(R.id.action_pokemonListFragment_to_pokemonDetailFragment, bundle)
     }
 
     companion object {
