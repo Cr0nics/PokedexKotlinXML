@@ -4,8 +4,46 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:layout_margin="16dp"
+    android:background="#ED000000"
     tools:context=".ui.PokemonFragment.PokemonDetailFragment">
+
+
+    <LinearLayout
+        android:id="@+id/onBack"
+        android:layout_width="100dp"
+        android:layout_height="100dp"
+        android:gravity="center_vertical|end"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">  <!-- o "center_vertical|right" -->
+
+    <ImageView
+        android:layout_width="81dp"
+        android:layout_height="81dp"
+        android:foregroundGravity="center"
+        android:src="@drawable/ic_onback" />
+
+</LinearLayout>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:padding="16dp"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintBottom_toBottomOf="parent">
+
+
+
+
+    <ProgressBar
+        android:id="@+id/progressBarDetail"
+        android:layout_width="wrap_content"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintBottom_toBottomOf="parent"
+        android:layout_height="wrap_content"/>
 
 
     <ImageView
@@ -25,7 +63,7 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="16dp"
         android:textAlignment="center"
-        android:textColor="@color/black"
+        android:textColor="@color/white"
         android:textSize="35sp"
         android:textStyle="bold"
         app:layout_constraintBottom_toTopOf="@+id/pokemonTypes"
@@ -51,7 +89,10 @@
             android:id="@+id/tvType1"
             android:layout_width="match_parent"
             android:layout_height="40dp"
+            android:gravity="center"
             android:textAlignment="center"
+            android:textColor="@color/white"
+            android:textStyle="bold"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
@@ -60,7 +101,10 @@
             android:id="@+id/tvType2"
             android:layout_width="match_parent"
             android:layout_height="40dp"
+            android:gravity="center"
             android:textAlignment="center"
+            android:textColor="@color/white"
+            android:textStyle="bold"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent" />
@@ -74,7 +118,6 @@
         android:layout_height="140dp"
         android:layout_marginHorizontal="16dp"
         android:layout_marginTop="32dp"
-        android:backgroundTint="@color/teal_700"
         android:gravity="bottom"
         android:orientation="horizontal"
         app:layout_constraintBottom_toTopOf="@+id/linearLayout3"
@@ -90,7 +133,7 @@
             android:layout_height="0dp"
             android:layout_marginHorizontal="8dp"
             android:layout_weight="1"
-            android:background="@color/black" />
+            android:background="@color/HP" />
 
         <View
             android:id="@+id/viewDef"
@@ -98,7 +141,7 @@
             android:layout_height="0dp"
             android:layout_marginHorizontal="8dp"
             android:layout_weight="1"
-            android:background="@color/black" />
+            android:background="@color/Defense" />
 
         <View
             android:id="@+id/viewSpeed"
@@ -106,7 +149,7 @@
             android:layout_height="0dp"
             android:layout_marginHorizontal="8dp"
             android:layout_weight="1"
-            android:background="@color/black" />
+            android:background="@color/Speed" />
 
         <View
             android:id="@+id/viewAttk"
@@ -115,7 +158,7 @@
             android:layout_height="0dp"
             android:layout_marginHorizontal="8dp"
             android:layout_weight="1"
-            android:background="@color/black" />
+            android:background="@color/Attack" />
 
         <View
             android:id="@+id/viewSpDef"
@@ -123,7 +166,7 @@
             android:layout_height="0dp"
             android:layout_marginHorizontal="8dp"
             android:layout_weight="1"
-            android:background="@color/black" />
+            android:background="@color/SpDefense" />
 
         <View
             android:id="@+id/viewSpAttk"
@@ -131,7 +174,7 @@
             android:layout_height="0dp"
             android:layout_marginHorizontal="8dp"
             android:layout_weight="1"
-            android:background="@color/black" />
+            android:background="@color/SpAttack" />
 
 
     </LinearLayout>
@@ -141,9 +184,10 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginHorizontal="16dp"
-        android:backgroundTint="@color/teal_700"
+        android:backgroundTint="@color/black"
         android:gravity="bottom"
         android:orientation="horizontal"
+        android:visibility="gone"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/linearLayout"
@@ -158,47 +202,66 @@
             android:maxLines="1"
             android:singleLine="true"
             android:text="@string/HP"
-            android:textSize="9sp" />
+            android:textAlignment="center"
+            android:textColor="@color/white"
+            android:textSize="9sp"
+            android:textStyle="bold" />
 
         <TextView
             android:layout_width="0dp"
+
             android:layout_height="wrap_content"
             android:layout_marginHorizontal="8dp"
             android:layout_weight="1"
             android:maxLines="1"
             android:singleLine="true"
             android:text="@string/Def"
-            android:textSize="9sp" />
+            android:textAlignment="center"
+            android:textColor="@color/white"
+            android:textSize="9sp"
+            android:textStyle="bold" />
 
         <TextView
             android:layout_width="0dp"
+
             android:layout_height="wrap_content"
             android:layout_marginHorizontal="8dp"
             android:layout_weight="1"
             android:maxLines="1"
             android:singleLine="true"
             android:text="@string/Speed"
-            android:textSize="9sp" />
+            android:textAlignment="center"
+            android:textColor="@color/white"
+            android:textSize="9sp"
+            android:textStyle="bold" />
 
         <TextView
             android:layout_width="0dp"
+
             android:layout_height="wrap_content"
             android:layout_marginHorizontal="8dp"
             android:layout_weight="1"
             android:maxLines="1"
             android:singleLine="true"
             android:text="@string/Attk"
-            android:textSize="9sp" />
+            android:textAlignment="center"
+            android:textColor="@color/white"
+            android:textSize="9sp"
+            android:textStyle="bold" />
 
         <TextView
             android:layout_width="0dp"
+
             android:layout_height="wrap_content"
             android:layout_marginHorizontal="8dp"
             android:layout_weight="1"
             android:maxLines="1"
             android:singleLine="true"
             android:text="@string/Sp.Def"
-            android:textSize="9sp" />
+            android:textAlignment="center"
+            android:textColor="@color/white"
+            android:textSize="9sp"
+            android:textStyle="bold" />
 
         <TextView
             android:layout_width="0dp"
@@ -208,8 +271,11 @@
             android:maxLines="1"
             android:singleLine="true"
             android:text="@string/Sp.Attk"
-            android:textSize="9sp" />
+            android:textAlignment="center"
+            android:textColor="@color/white"
+            android:textSize="9sp"
+            android:textStyle="bold" />
     </LinearLayout>
 
-
+    </androidx.constraintlayout.widget.ConstraintLayout>
 </androidx.constraintlayout.widget.ConstraintLayout>

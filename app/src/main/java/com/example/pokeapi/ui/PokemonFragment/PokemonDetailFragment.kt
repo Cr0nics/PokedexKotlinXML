@@ -7,12 +7,14 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.core.content.ContextCompat
 import androidx.core.view.isVisible
 import androidx.core.widget.addTextChangedListener
 import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.pokeapi.R
+import com.example.pokeapi.data.model.ConsumedModel.PokeItemDetails
 import com.example.pokeapi.data.model.ConsumedModel.PokeListItem
 import com.example.pokeapi.databinding.FragmentPokemonDetailBinding
 import com.example.pokeapi.databinding.FragmentPokemonListBinding
@@ -41,28 +43,29 @@ class PokemonDetailFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
         val texto: String? = (requireArguments().getString("texto")).toString()
         viewModel.getPokemonDetail("${texto.toString().lowercase()}")
+        binding.onBack.setOnClickListener {
+            findNavController().popBackStack()
+        }
 
         viewModel.pokemonState.observe(viewLifecycleOwner) { pokemonState ->
             when (pokemonState) {
                 is PokemonState.Loading -> {
+
+
 
                 }
                 is PokemonState.Error -> {
                     // Actualiza la vista para indicar que se produjo un error
                 }
                 is PokemonState.Success -> {
+                    binding.progressBarDetail.isVisible = false
 
                     Picasso.get().load(pokemonState.pokemon.img).into(binding.imviPokemon)
                     binding.tvPokemon.text = pokemonState.pokemon.name
-                    binding.tvType1.text = pokemonState.pokemon.types[0]
-                    if (pokemonState.pokemon.types.size > 1){
-                        binding.tvType2.text = pokemonState.pokemon.types[1]
-                    }
-
-                    viewModel.statsOnUi(view = binding.viewHP,stat = pokemonState.pokemon.hp)
-                    viewModel.statsOnUi(view = binding.viewDef,stat = 140)
-                    viewModel.statsOnUi(view = binding.viewSpeed,stat = 70)
-                    viewModel.statsOnUi(view = binding.viewAttk,stat = 170)
+                    setStatsOnLayout(pokemonState.pokemon)
+                    setTypes(pokemon = pokemonState.pokemon)
+                    binding.linearLayout3.isVisible = true
+                    binding.linearLayout.isVisible = true
 
 
                 }
@@ -76,20 +79,37 @@ class PokemonDetailFragment : Fragment() {
     //pokemon:PokeListItem
 
 
-    private fun navigate(view: View, pokemon: PokeListItem) {
-
-        val bundle = Bundle()
-        bundle.putString("texto", pokemon.name)
-        val pokemonDetailFragment = PokemonDetailFragment()
-        pokemonDetailFragment.arguments = bundle
-        findNavController().navigate(
-            R.id.action_pokemonListFragment_to_pokemonDetailFragment,
-            bundle
-        )
-    }
-
     companion object {
         fun newInstance() = PokemonDetailFragment()
     }
+
+    fun setStatsOnLayout(pokemon: PokeItemDetails) {
+        viewModel.statsOnUi(view = binding.viewHP, stat = pokemon.hp)
+        viewModel.statsOnUi(view = binding.viewDef, stat = pokemon.defense)
+        viewModel.statsOnUi(view = binding.viewSpeed, stat = pokemon.speed)
+        viewModel.statsOnUi(view = binding.viewAttk, stat = pokemon.attack)
+        viewModel.statsOnUi(view = binding.viewSpAttk, stat = pokemon.specialAttack)
+        viewModel.statsOnUi(view = binding.viewSpDef, stat = pokemon.specialDefense)
+    }
+
+
+    fun setTypes(pokemon: PokeItemDetails) {
+
+        binding.tvType1.text = pokemon.types[0]
+//        binding.tvType1.setBackgroundColor(viewModel.typeColor(pokemon.types[0]))
+        binding.tvType1.setBackgroundColor(
+            ContextCompat.getColor(requireContext(), viewModel.typeColor(pokemon.types[0]))
+        )
+
+        if (pokemon.types.size > 1) {
+            binding.tvType2.text = pokemon.types[1]
+            binding.tvType2.setBackgroundColor(
+                ContextCompat.getColor(requireContext(), viewModel.typeColor(pokemon.types[1]))
+            )
+        }
+
+
+    }
+
 
 }
