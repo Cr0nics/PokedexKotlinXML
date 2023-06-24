@@ -21,11 +21,12 @@ import com.example.pokeapi.ui.viewModel.DataState
 import com.example.pokeapi.ui.viewModel.PokemonDetailViewModel
 import com.example.pokeapi.ui.viewModel.PokemonListViewModel
 import com.example.pokeapi.ui.viewModel.PokemonState
+import com.squareup.picasso.Picasso
 
 class PokemonDetailFragment : Fragment() {
 
     private lateinit var binding: FragmentPokemonDetailBinding
-    private val viewModel: PokemonDetailViewModel by viewModels()
+    private val viewModel: PokemonDetailViewModel<Any?> by viewModels()
 
 
     override fun onCreateView(
@@ -44,16 +45,25 @@ class PokemonDetailFragment : Fragment() {
         viewModel.pokemonState.observe(viewLifecycleOwner) { pokemonState ->
             when (pokemonState) {
                 is PokemonState.Loading -> {
-                    binding.tvPokemon.isVisible = false
+
                 }
                 is PokemonState.Error -> {
                     // Actualiza la vista para indicar que se produjo un error
                 }
                 is PokemonState.Success -> {
 
-                    Log.i("Joaking", pokemonState.pokemon.name)
+                    Picasso.get().load(pokemonState.pokemon.img).into(binding.imviPokemon)
                     binding.tvPokemon.text = pokemonState.pokemon.name
-                    binding.tvPokemon.isVisible = true
+                    binding.tvType1.text = pokemonState.pokemon.types[0]
+                    if (pokemonState.pokemon.types.size > 1){
+                        binding.tvType2.text = pokemonState.pokemon.types[1]
+                    }
+
+                    viewModel.statsOnUi(view = binding.viewHP,stat = pokemonState.pokemon.hp)
+                    viewModel.statsOnUi(view = binding.viewDef,stat = 140)
+                    viewModel.statsOnUi(view = binding.viewSpeed,stat = 70)
+                    viewModel.statsOnUi(view = binding.viewAttk,stat = 170)
+
 
                 }
 
