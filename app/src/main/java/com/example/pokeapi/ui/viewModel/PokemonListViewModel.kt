@@ -7,6 +7,7 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.example.capitalizeFirstChar
 import com.example.pokeapi.data.model.ConsumedModel.PokeListItem
+import com.example.pokeapi.domain.GetPokemonDetailUseCase
 import com.example.pokeapi.domain.GetPokemonListUseCase
 import kotlinx.coroutines.launch
 import java.io.IOException
@@ -37,25 +38,20 @@ class PokemonListViewModel : ViewModel() {
             }
         }
     }
-    fun filteredPokemons(pokemonNameFilter:String, pokemonList: List<PokeListItem>): List<PokeListItem>{
+
+    fun filteredPokemons(
+        pokemonNameFilter: String,
+        pokemonList: List<PokeListItem>
+    ): List<PokeListItem> {
 
         val filteredPokemon = pokemonList.filter { pokemon ->
-            pokemon.name.contains(pokemonNameFilter) || pokemon.name.contains(capitalizeFirstChar(pokemonNameFilter) )
+            pokemon.name.contains(pokemonNameFilter.lowercase()) || pokemon.name.contains(
+                capitalizeFirstChar(pokemonNameFilter)
+            )
         }
 
         return filteredPokemon
     }
-    //  fun getDitto() {
-    //       viewModelScope.launch {
-    //           try {
-    //             val pokemon = GetPokemonDetailUseCase().invoke("ditto")
-    //                  _pokemonInfo.postValue(pokemon)
-    //            Log.i("Joaking","$pokemonInfo")
-    //        } catch (e: IOException) {
-    //            Log.e("Joaking","error")
-    //        }
-    //      }
-
 
 
 }
