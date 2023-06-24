@@ -2,12 +2,13 @@ package com.example.pokeapi.data.model.DetailModel
 
 import com.google.gson.annotations.SerializedName
 data class PokeModelDetails(
+    @SerializedName("id") val id: Int,
+    @SerializedName("height") val height: Int,
     @SerializedName("name") val name: String,
     @SerializedName("sprites") val sprites: Sprites,
-
-    // falta:
-    // - debelidades -> Array
-)
+    @SerializedName("stats") val pokemonDetails: List<Stats>,
+    @SerializedName("types") val types: List<Types>,
+    @SerializedName("weight") val weight: Int)
 
 data class Sprites(
     @SerializedName("other") val other: Other
