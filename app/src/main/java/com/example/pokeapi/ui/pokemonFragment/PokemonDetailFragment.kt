@@ -35,6 +35,9 @@ class PokemonDetailFragment : Fragment() {
         binding.onBack.setOnClickListener {
             findNavController().popBackStack()
         }
+        binding.btnTryAgain.setOnClickListener {
+            viewModel.getPokemonDetail(texto.lowercase())
+        }
 
         viewModel.pokemonState.observe(viewLifecycleOwner) { pokemonState ->
             when (pokemonState) {
@@ -92,7 +95,6 @@ class PokemonDetailFragment : Fragment() {
         viewModel.statsOnUi(view = binding.viewSpAttk, stat = pokemon.specialAttack)
         viewModel.statsOnUi(view = binding.viewSpDef, stat = pokemon.specialDefense)
     }
-
 
 
 }
