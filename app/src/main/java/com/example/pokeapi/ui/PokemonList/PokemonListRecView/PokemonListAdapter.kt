@@ -5,10 +5,7 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.example.pokeapi.R
-import com.example.pokeapi.data.model.ConsumedModel.PokeListItem
-import com.example.pokeapi.data.model.DetailModel.PokeModelDetails
-import com.example.pokeapi.data.model.PokemonListModel
-import com.example.pokeapi.data.model.ResultPokemon
+import com.example.pokeapi.data.model.consumedModel.PokeListItem
 
 class PokemonListAdapter(private var pokemonList: List<PokeListItem>,private val onItemClick: (view:View,pokemon:PokeListItem) -> Unit) :
     RecyclerView.Adapter<PokemonListViewHolder>() {

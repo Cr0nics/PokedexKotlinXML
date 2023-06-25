@@ -1,27 +1,16 @@
-package com.example.pokeapi.ui.PokemonFragment
+package com.example.pokeapi.ui.pokemonFragment
 
-import androidx.lifecycle.ViewModelProvider
 import android.os.Bundle
-import android.util.Log
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import androidx.core.content.ContextCompat
 import androidx.core.view.isVisible
-import androidx.core.widget.addTextChangedListener
 import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
-import androidx.recyclerview.widget.LinearLayoutManager
-import com.example.pokeapi.R
-import com.example.pokeapi.data.model.ConsumedModel.PokeItemDetails
-import com.example.pokeapi.data.model.ConsumedModel.PokeListItem
+import com.example.pokeapi.data.model.consumedModel.PokeItemDetails
 import com.example.pokeapi.databinding.FragmentPokemonDetailBinding
-import com.example.pokeapi.databinding.FragmentPokemonListBinding
-import com.example.pokeapi.ui.PokemonList.PokemonListRecView.PokemonListAdapter
-import com.example.pokeapi.ui.viewModel.DataState
 import com.example.pokeapi.ui.viewModel.PokemonDetailViewModel
-import com.example.pokeapi.ui.viewModel.PokemonListViewModel
 import com.example.pokeapi.ui.viewModel.PokemonState
 import com.squareup.picasso.Picasso
 
@@ -41,8 +30,8 @@ class PokemonDetailFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        val texto: String? = (requireArguments().getString("texto")).toString()
-        viewModel.getPokemonDetail("${texto.toString().lowercase()}")
+        val texto: String = (requireArguments().getString("texto")).toString()
+        viewModel.getPokemonDetail(texto.lowercase())
         binding.onBack.setOnClickListener {
             findNavController().popBackStack()
         }
@@ -50,20 +39,32 @@ class PokemonDetailFragment : Fragment() {
         viewModel.pokemonState.observe(viewLifecycleOwner) { pokemonState ->
             when (pokemonState) {
                 is PokemonState.Loading -> {
-
+                    binding.progressBarDetail.isVisible = true
+                    binding.btnTryAgain.isVisible = false
 
 
                 }
                 is PokemonState.Error -> {
-                    // Actualiza la vista para indicar que se produjo un error
+
+                    binding.btnTryAgain.isVisible = true
+                    binding.progressBarDetail.isVisible = false
+
                 }
                 is PokemonState.Success -> {
+                    binding.btnTryAgain.isVisible = false
                     binding.progressBarDetail.isVisible = false
 
                     Picasso.get().load(pokemonState.pokemon.img).into(binding.imviPokemon)
                     binding.tvPokemon.text = pokemonState.pokemon.name
                     setStatsOnLayout(pokemonState.pokemon)
-                    setTypes(pokemon = pokemonState.pokemon)
+
+                    viewModel.setTypes1(
+                        pokemon = pokemonState.pokemon,
+                        tvType1 = binding.tvType1,
+                        tvType2 = binding.tvType2,
+                        context = requireContext()
+                    )
+
                     binding.linearLayout3.isVisible = true
                     binding.linearLayout.isVisible = true
 
@@ -83,7 +84,7 @@ class PokemonDetailFragment : Fragment() {
         fun newInstance() = PokemonDetailFragment()
     }
 
-    fun setStatsOnLayout(pokemon: PokeItemDetails) {
+    private fun setStatsOnLayout(pokemon: PokeItemDetails) {
         viewModel.statsOnUi(view = binding.viewHP, stat = pokemon.hp)
         viewModel.statsOnUi(view = binding.viewDef, stat = pokemon.defense)
         viewModel.statsOnUi(view = binding.viewSpeed, stat = pokemon.speed)
@@ -92,24 +93,6 @@ class PokemonDetailFragment : Fragment() {
         viewModel.statsOnUi(view = binding.viewSpDef, stat = pokemon.specialDefense)
     }
 
-
-    fun setTypes(pokemon: PokeItemDetails) {
-
-        binding.tvType1.text = pokemon.types[0]
-//        binding.tvType1.setBackgroundColor(viewModel.typeColor(pokemon.types[0]))
-        binding.tvType1.setBackgroundColor(
-            ContextCompat.getColor(requireContext(), viewModel.typeColor(pokemon.types[0]))
-        )
-
-        if (pokemon.types.size > 1) {
-            binding.tvType2.text = pokemon.types[1]
-            binding.tvType2.setBackgroundColor(
-                ContextCompat.getColor(requireContext(), viewModel.typeColor(pokemon.types[1]))
-            )
-        }
-
-
-    }
 
 
 }

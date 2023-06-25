@@ -9,26 +9,22 @@ import android.view.ViewGroup
 import androidx.core.view.isVisible
 import androidx.core.widget.addTextChangedListener
 import androidx.fragment.app.viewModels
-import androidx.navigation.NavDirections
-import androidx.navigation.Navigation
-import androidx.navigation.findNavController
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.pokeapi.R
-import com.example.pokeapi.data.model.ConsumedModel.PokeListItem
+import com.example.pokeapi.data.model.consumedModel.PokeListItem
 import com.example.pokeapi.databinding.FragmentPokemonListBinding
-import com.example.pokeapi.ui.PokemonFragment.PokemonDetailFragment
+import com.example.pokeapi.ui.pokemonFragment.PokemonDetailFragment
 import com.example.pokeapi.ui.PokemonList.PokemonListRecView.PokemonListAdapter
 import com.example.pokeapi.ui.viewModel.DataState
 import com.example.pokeapi.ui.viewModel.PokemonListViewModel
-import com.example.pokeapi.ui.viewModel.PokemonState
 
 class PokemonListFragment : Fragment() {
 
     private lateinit var binding: FragmentPokemonListBinding
     private val viewModel: PokemonListViewModel by viewModels()
     private val adapter: PokemonListAdapter = PokemonListAdapter(emptyList()) {view:View,pokemon: PokeListItem ->
-        navigate(view,pokemon)
+        navigate(pokemon)
     }
 
 
@@ -43,19 +39,30 @@ class PokemonListFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         viewModel.getAllPokemons()
+        binding.btnTryAgain.setOnClickListener { viewModel.getAllPokemons() }
         recyclerViewConfig()
 
         viewModel.dataState.observe(viewLifecycleOwner) { dataState ->
             when (dataState) {
                 is DataState.Loading -> {
 
+                    binding.btnTryAgain.isVisible = false
+
                 }
                 is DataState.Error -> {
-                    // Actualiza la vista para indicar que se produjo un error
+
+                    binding.recyclerView.isVisible = false
+                    binding.btnTryAgain.isVisible = true
+                    binding.progressBar.isVisible = false
+
+                    Log.i("Joaking","error")
                 }
                 is DataState.Success -> {
 
+                    binding.recyclerView.isVisible = true
+                    binding.btnTryAgain.isVisible = false
                     binding.progressBar.isVisible = false
+
                     // Actualiza la vista con la lista de Pokemon
                     adapter.updateList(dataState.pokemonList)
                     binding.editTextTextFilter.addTextChangedListener { userFilter ->
@@ -82,7 +89,7 @@ class PokemonListFragment : Fragment() {
     //pokemon:PokeListItem
 
 
-    private fun navigate(view: View,pokemon:PokeListItem) {
+    private fun navigate(pokemon:PokeListItem) {
 
         val bundle = Bundle()
         bundle.putString("texto", pokemon.name)

@@ -1,4 +1,4 @@
-package com.example.pokeapi.data.model
+package com.example.pokeapi.data.model.modelResponse
 
 data class PokemonListModel(
     val results: List<ResultPokemon>
