@@ -3,4 +3,15 @@
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
     <string name="searchHint">Search</string>
+
+
+    <string name="Speed">Speed</string>
+    <string name="HP">HP</string>
+    <string name="Sp.Attk">Sp.Atk</string>
+
+    <string name="Attk">Attk</string>
+    <string name="Def">Def</string>
+    <string name="Sp.Def">Sp.Def</string>
+
+
 </resources>

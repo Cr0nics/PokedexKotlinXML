@@ -14,10 +14,10 @@ import com.squareup.picasso.Picasso
 class PokemonListViewHolder(view:View,) : RecyclerView.ViewHolder(view)  {
     private val binding = PokemonlistitemBinding.bind(view)
 
-    fun bind(pokemon:PokeListItem,onItemClick: (Int) -> Unit){
+    fun bind(pokemon:PokeListItem,onItemClick: (view:View,pokemon:PokeListItem) -> Unit){
         Picasso.get().load(pokemon.img).into(binding.imviPokemonPhoto)
         binding.tvPokemonName.text = pokemon.name
-        itemView.setOnClickListener { onItemClick }
+        itemView.setOnClickListener { onItemClick(itemView,pokemon) }
     }
 
 }

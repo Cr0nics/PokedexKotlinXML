@@ -1,5 +1,6 @@
 package com.example.pokeapi.data
 
+import com.example.pokeapi.data.model.ConsumedModel.PokeItemDetails
 import com.example.pokeapi.data.model.ConsumedModel.PokeListItem
 import com.example.pokeapi.data.model.ConsumedModel.toDomain
 import com.example.pokeapi.data.model.DetailModel.PokeModelDetails
@@ -16,8 +17,9 @@ class PokemonListRepository {
         return response.map { it.toDomain() }
     }
 
-    suspend fun getPokemonDetail(pokemonName:String): PokeModelDetails{
-        return api.getPokemonDetail(pokemonName)
+    suspend fun getPokemonDetail(pokemonName:String): PokeItemDetails {
+        val response = api.getPokemonDetail(pokemonName)
+        return response.toDomain()
 
     }
 }
