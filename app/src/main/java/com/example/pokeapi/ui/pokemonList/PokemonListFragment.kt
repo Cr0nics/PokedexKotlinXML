@@ -1,4 +1,4 @@
-package com.example.pokeapi.ui.PokemonList
+package com.example.pokeapi.ui.pokemonList
 
 import android.os.Bundle
 import android.util.Log
@@ -15,7 +15,7 @@ import com.example.pokeapi.R
 import com.example.pokeapi.data.model.consumedModel.PokeListItem
 import com.example.pokeapi.databinding.FragmentPokemonListBinding
 import com.example.pokeapi.ui.pokemonFragment.PokemonDetailFragment
-import com.example.pokeapi.ui.PokemonList.PokemonListRecView.PokemonListAdapter
+import com.example.pokeapi.ui.pokemonList.pokemonListRecView.PokemonListAdapter
 import com.example.pokeapi.ui.viewModel.DataState
 import com.example.pokeapi.ui.viewModel.PokemonListViewModel
 
@@ -23,7 +23,7 @@ class PokemonListFragment : Fragment() {
 
     private lateinit var binding: FragmentPokemonListBinding
     private val viewModel: PokemonListViewModel by viewModels()
-    private val adapter: PokemonListAdapter = PokemonListAdapter(emptyList()) {view:View,pokemon: PokeListItem ->
+    private val adapter: PokemonListAdapter = PokemonListAdapter(emptyList()) {pokemon: PokeListItem ->
         navigate(pokemon)
     }
 

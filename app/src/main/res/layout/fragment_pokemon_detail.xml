@@ -17,6 +17,7 @@
         app:layout_constraintTop_toTopOf="parent">
 
     <ImageView
+        android:contentDescription="@string/Back"
         android:layout_width="81dp"
         android:layout_height="81dp"
         android:foregroundGravity="center"
@@ -47,6 +48,7 @@
 
 
     <ImageView
+        android:contentDescription="@string/PokemonImage"
         android:id="@+id/imviPokemon"
         android:layout_width="268dp"
         android:layout_height="213dp"
@@ -106,7 +108,7 @@
                 <TextView
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
-                    android:text="Try Again"
+                    android:text="@string/Sp.Def"
                     android:gravity="center"
                     android:textColor="@color/white"/>
             </LinearLayout>

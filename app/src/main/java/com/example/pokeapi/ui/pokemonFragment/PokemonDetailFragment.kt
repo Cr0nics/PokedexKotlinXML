@@ -17,7 +17,7 @@ import com.squareup.picasso.Picasso
 class PokemonDetailFragment : Fragment() {
 
     private lateinit var binding: FragmentPokemonDetailBinding
-    private val viewModel: PokemonDetailViewModel<Any?> by viewModels()
+    private val viewModel: PokemonDetailViewModel by viewModels()
 
 
     override fun onCreateView(

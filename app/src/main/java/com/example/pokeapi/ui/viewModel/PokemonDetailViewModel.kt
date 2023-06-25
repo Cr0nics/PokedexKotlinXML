@@ -24,7 +24,7 @@ sealed class PokemonState {
     data class Success(val pokemon: PokeItemDetails) : PokemonState()
 }
 
-class PokemonDetailViewModel<Resources> : ViewModel() {
+class PokemonDetailViewModel : ViewModel() {
     private val _pokemonState = MutableLiveData<PokemonState>()
     val pokemonState: LiveData<PokemonState> = _pokemonState
 

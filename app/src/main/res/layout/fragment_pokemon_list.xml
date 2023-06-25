@@ -12,6 +12,7 @@
 
 
     <ImageView
+        android:contentDescription="@string/PokemonLogo"
         android:id="@+id/imageView"
         android:layout_width="0dp"
         android:layout_height="56dp"
@@ -62,7 +63,7 @@
             <TextView
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:text="Try Again"
+                android:text="@string/TryAgain"
                 android:gravity="center"
                 android:textColor="@color/white"/>
         </LinearLayout>
