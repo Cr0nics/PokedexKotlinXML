@@ -1,16 +1,13 @@
-package com.example.pokeapi.data.model.ConsumedModel
+package com.example.pokeapi.data.model.consumedModel
 
 import com.example.capitalizeFirstChar
-import com.example.pokeapi.data.model.ResultPokemon
-import java.util.*
+import com.example.pokeapi.data.model.modelResponse.ResultPokemon
 
 class PokeListItem(
     val id: Int,
     val name: String,
     val img: String
-){
-    val formatId = "N° ${id.toString().padStart(3,'0')}"
-}
+)
 
 private const val URL_RAW = "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/"
 

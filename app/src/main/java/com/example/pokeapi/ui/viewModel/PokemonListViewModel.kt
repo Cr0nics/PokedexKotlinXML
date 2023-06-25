@@ -6,8 +6,7 @@ import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.example.capitalizeFirstChar
-import com.example.pokeapi.data.model.ConsumedModel.PokeListItem
-import com.example.pokeapi.domain.GetPokemonDetailUseCase
+import com.example.pokeapi.data.model.consumedModel.PokeListItem
 import com.example.pokeapi.domain.GetPokemonListUseCase
 import kotlinx.coroutines.launch
 import java.io.IOException

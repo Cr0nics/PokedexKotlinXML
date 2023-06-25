@@ -1,20 +1,18 @@
 package com.example.pokeapi.ui.viewModel
 
-import android.graphics.Color
+import android.content.Context
 import android.util.Log
 import android.util.TypedValue
 import android.view.View
 import android.view.ViewGroup
-import androidx.core.content.ContentProviderCompat.requireContext
+import android.widget.TextView
 import androidx.core.content.ContextCompat
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.example.pokeapi.R
-import com.example.pokeapi.data.model.ConsumedModel.PokeItemDetails
-import com.example.pokeapi.data.model.ConsumedModel.PokeListItem
-import com.example.pokeapi.data.model.DetailModel.PokeModelDetails
+import com.example.pokeapi.data.model.consumedModel.PokeItemDetails
 import com.example.pokeapi.domain.GetPokemonDetailUseCase
 import kotlinx.coroutines.launch
 import java.io.IOException
@@ -26,7 +24,7 @@ sealed class PokemonState {
     data class Success(val pokemon: PokeItemDetails) : PokemonState()
 }
 
-class PokemonDetailViewModel<Resources> : ViewModel() {
+class PokemonDetailViewModel : ViewModel() {
     private val _pokemonState = MutableLiveData<PokemonState>()
     val pokemonState: LiveData<PokemonState> = _pokemonState
 
@@ -72,7 +70,23 @@ class PokemonDetailViewModel<Resources> : ViewModel() {
         }
 
     }
+    fun setTypes1(pokemon: PokeItemDetails,tvType1: TextView,tvType2:TextView,context:Context) {
 
+        tvType1.text = pokemon.types[0]
+//        binding.tvType1.setBackgroundColor(viewModel.typeColor(pokemon.types[0]))
+        tvType1.setBackgroundColor(
+            ContextCompat.getColor(context, typeColor(pokemon.types[0]))
+        )
+
+        if (pokemon.types.size > 1) {
+            tvType2.text = pokemon.types[1]
+            tvType2.setBackgroundColor(
+                ContextCompat.getColor(context, typeColor(pokemon.types[1]))
+            )
+        }
+
+
+    }
     fun statsOnUi(view: View, stat: Int) {
 
         val dpValue = TypedValue.applyDimension(
