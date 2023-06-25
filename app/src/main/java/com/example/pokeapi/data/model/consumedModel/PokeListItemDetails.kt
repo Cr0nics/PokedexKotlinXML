@@ -1,7 +1,7 @@
-package com.example.pokeapi.data.model.ConsumedModel
+package com.example.pokeapi.data.model.consumedModel
 
-import com.example.pokeapi.data.model.DetailModel.PokeModelDetails
-import com.example.pokeapi.data.model.DetailModel.Types
+import com.example.pokeapi.data.model.modelResponse.PokeModelDetails
+import com.example.pokeapi.data.model.modelResponse.Types
 import java.util.*
 
 data class PokeItemDetails(
@@ -55,6 +55,4 @@ private fun replaceFirstChar(t: String): String {
 
 }
 
-private fun typesSelector(){
 
-}

@@ -15,6 +15,7 @@
         android:background="@color/PokemonitemBackground">
 
         <ImageView
+            android:contentDescription="@string/PokemonImage"
             android:id="@+id/imviPokemonPhoto"
             android:layout_width="174dp"
             android:layout_height="match_parent"

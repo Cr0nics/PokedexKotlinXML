@@ -14,4 +14,11 @@
     <string name="Sp.Def">Sp.Def</string>
 
 
+    <string name="PokemonImage">Pokemon Image</string>
+    <string name="Back">Back</string>
+    <string name="PokemonLogo">Pokemon Logo</string>
+
+    <string name="TryAgain">Try Again</string>
+
+
 </resources>
