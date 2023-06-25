@@ -10,7 +10,9 @@
     android:padding="16dp"
     tools:context=".ui.MainActivity">
 
+
     <ImageView
+        android:contentDescription="@string/PokemonLogo"
         android:id="@+id/imageView"
         android:layout_width="0dp"
         android:layout_height="56dp"
@@ -38,6 +40,36 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toEndOf="@+id/imageView"
         app:layout_constraintTop_toTopOf="@+id/imageView" />
+
+
+    <androidx.cardview.widget.CardView
+        app:cardElevation="16dp"
+        android:visibility="gone"
+
+        android:id="@+id/btnTryAgain"
+        android:layout_width="101dp"
+        android:layout_height="60dp"
+        android:backgroundTint="#0047FF"
+        app:cardCornerRadius="18dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_gravity="center_vertical"
+            android:layout_height="match_parent">
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:text="@string/TryAgain"
+                android:gravity="center"
+                android:textColor="@color/white"/>
+        </LinearLayout>
+
+
+    </androidx.cardview.widget.CardView>
 
     <ProgressBar
         android:id="@+id/progressBar"

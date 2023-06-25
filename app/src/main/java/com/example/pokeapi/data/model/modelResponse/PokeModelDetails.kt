@@ -1,4 +1,4 @@
-package com.example.pokeapi.data.model.DetailModel
+package com.example.pokeapi.data.model.modelResponse
 
 import com.google.gson.annotations.SerializedName
 data class PokeModelDetails(
